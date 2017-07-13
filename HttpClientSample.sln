@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientSample.Wpf", "Htt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientSample.Core", "HttpClientSample.Core\HttpClientSample.Core.csproj", "{47447210-DB21-4709-91F7-395257CAF7ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientSample.Mac", "HttpClientSample.Mac\HttpClientSample.Mac.csproj", "{C31A88D9-ADDE-4735-88D7-31906B956E36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{47447210-DB21-4709-91F7-395257CAF7ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47447210-DB21-4709-91F7-395257CAF7ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47447210-DB21-4709-91F7-395257CAF7ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C31A88D9-ADDE-4735-88D7-31906B956E36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C31A88D9-ADDE-4735-88D7-31906B956E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C31A88D9-ADDE-4735-88D7-31906B956E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C31A88D9-ADDE-4735-88D7-31906B956E36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
