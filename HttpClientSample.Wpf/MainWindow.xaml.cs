@@ -30,7 +30,7 @@ namespace HttpClientSample.Wpf
         {
             var ser = new HttpGetService();
             var buf = await ser.GetTextFromUrl(edtUrl.Text);
-            MessageBox.Show($"Content={buf.Substring(0,200)}");
+            MessageBox.Show($"Content={buf}");
         }
     }
 }
