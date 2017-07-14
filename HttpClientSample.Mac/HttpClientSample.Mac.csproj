@@ -91,5 +91,6 @@
       <Name>HttpClientSample.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\HttpClientSample.Shared\HttpClientSample.Shared.projitems" Label="Shared" Condition="Exists('..\HttpClientSample.Shared\HttpClientSample.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
 </Project>
