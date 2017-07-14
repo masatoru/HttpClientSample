@@ -37,8 +37,8 @@ namespace HttpClientSample.Wpf
         private void BtnWebRequest_OnClick(object sender, RoutedEventArgs e)
         {
             var ser = new HttpWebRequestService();
-            //var buf = await ser.GetTextFromUrl(edtUrl.Text);
-            //MessageBox.Show($"Content={buf}");
+            ser.SaveFileFromUrl(edtUrl.Text,edtOutPath.Text);
+            MessageBox.Show($"完了しました");
         }
     }
 }

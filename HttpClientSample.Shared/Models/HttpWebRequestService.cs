@@ -7,7 +7,7 @@ namespace HttpClientSample.Shared.Models
 {
     public class HttpWebRequestService
     {
-        public static void SaveFileFromUrl(string url, string outpath)
+        public void SaveFileFromUrl(string url, string outpath)
         {
             //If-Rangeヘッダに渡すエンティティタグを指定するときは指定する
             string entityTag = "";
