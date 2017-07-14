@@ -3,6 +3,7 @@
 using AppKit;
 using Foundation;
 using HttpClientSample.Core.Models;
+using HttpClientSample.Shared.Models;
 
 namespace HttpClientSample.Mac
 {
@@ -18,6 +19,7 @@ namespace HttpClientSample.Mac
 
             // Do any additional setup after loading the view.
 
+            // HttpClientを使ってURLを取得する
             btnGet.Activated += async (sender, e) => {
 				    var ser = new HttpGetService();
 				    var buf = await ser.GetTextFromUrl(edtUrl.StringValue);
@@ -27,6 +29,18 @@ namespace HttpClientSample.Mac
 				        alert.RunSheetModal(null);
 				    }
 			};
+
+            // HttpWebRequestを使ってURLをファイルに出力する
+            btnWebRequest.Activated += (sender, e) => {
+                var ser = new HttpWebRequestService();
+				ser.SaveFileFromUrl(edtUrl.StringValue, edtOutPath.StringValue);
+
+				using (var alert = new NSAlert())
+				{
+					alert.MessageText = "完了しました";
+					alert.RunSheetModal(null);
+				}  
+            };
         }
 
         //partial void GetUrlText(NSObject sender)

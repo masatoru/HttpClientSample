@@ -16,6 +16,12 @@ namespace HttpClientSample.Mac
         AppKit.NSButton btnGet { get; set; }
 
         [Outlet]
+        AppKit.NSButton btnWebRequest { get; set; }
+
+        [Outlet]
+        AppKit.NSTextField edtOutPath { get; set; }
+
+        [Outlet]
         AppKit.NSTextField edtUrl { get; set; }
 
         [Action ("GetUrlText:")]
@@ -23,14 +29,24 @@ namespace HttpClientSample.Mac
         
         void ReleaseDesignerOutlets ()
         {
+            if (btnGet != null) {
+                btnGet.Dispose ();
+                btnGet = null;
+            }
+
+            if (btnWebRequest != null) {
+                btnWebRequest.Dispose ();
+                btnWebRequest = null;
+            }
+
             if (edtUrl != null) {
                 edtUrl.Dispose ();
                 edtUrl = null;
             }
 
-            if (btnGet != null) {
-                btnGet.Dispose ();
-                btnGet = null;
+            if (edtOutPath != null) {
+                edtOutPath.Dispose ();
+                edtOutPath = null;
             }
         }
     }
