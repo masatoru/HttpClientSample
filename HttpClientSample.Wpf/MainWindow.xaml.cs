@@ -1,7 +1,9 @@
 ﻿using HttpClientSample.Core.Models;
+using HttpClientSample.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,11 +28,17 @@ namespace HttpClientSample.Wpf
             InitializeComponent();
         }
 
-        private async void BtnGet_OnClick(object sender, RoutedEventArgs e)
+        private async void BtnHttpClient_OnClick(object sender, RoutedEventArgs e)
         {
             var ser = new HttpGetService();
             var buf = await ser.GetTextFromUrl(edtUrl.Text);
             MessageBox.Show($"Content={buf}");
+        }
+        private void BtnWebRequest_OnClick(object sender, RoutedEventArgs e)
+        {
+            var ser = new HttpWebRequestService();
+            //var buf = await ser.GetTextFromUrl(edtUrl.Text);
+            //MessageBox.Show($"Content={buf}");
         }
     }
 }
