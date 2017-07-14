@@ -18,6 +18,10 @@ namespace HttpClientSample.Mac
             base.ViewDidLoad();
 
             // Do any additional setup after loading the view.
+            edtUrl.StringValue = "https://yahoo.co.jp";
+
+            var desktopDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            edtOutPath.StringValue = System.IO.Path.Combine(desktopDir,"yahoo.htm");
 
             // HttpClientを使ってURLを取得する
             btnGet.Activated += async (sender, e) => {
