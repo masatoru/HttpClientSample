@@ -9,6 +9,7 @@ namespace HttpClientSample.Shared.Models
     {
         public void SaveFileFromUrl(string url, string outpath)
         {
+            // https://dobon.net/vb/dotnet/internet/resumedownload.html
             //If-Rangeヘッダに渡すエンティティタグを指定するときは指定する
             string entityTag = "";
 

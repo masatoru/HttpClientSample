@@ -26,6 +26,10 @@ namespace HttpClientSample.Wpf
         public MainWindow()
         {
             InitializeComponent();
+
+            edtUrl.Text = "https://yahoo.co.jp";
+            var desktopDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            edtOutPath.Text = System.IO.Path.Combine(desktopDir, "yahoo.htm");
         }
 
         private async void BtnHttpClient_OnClick(object sender, RoutedEventArgs e)
@@ -39,6 +43,10 @@ namespace HttpClientSample.Wpf
             var ser = new HttpWebRequestService();
             ser.SaveFileFromUrl(edtUrl.Text,edtOutPath.Text);
             MessageBox.Show($"完了しました");
+        }
+        private void BtnExit(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }
