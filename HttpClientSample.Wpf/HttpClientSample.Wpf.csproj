@@ -114,5 +114,6 @@
       <Name>HttpClientSample.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\HttpClientSample.Shared\HttpClientSample.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

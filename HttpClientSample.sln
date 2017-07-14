@@ -5,11 +5,17 @@ VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientSample.Wpf", "HttpClientSample.Wpf\HttpClientSample.Wpf.csproj", "{749449E7-9159-4EB3-AA29-1869FF3AB5F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientSample.Core", "HttpClientSample.Core\HttpClientSample.Core.csproj", "{47447210-DB21-4709-91F7-395257CAF7ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpClientSample.Core", "HttpClientSample.Core\HttpClientSample.Core.csproj", "{47447210-DB21-4709-91F7-395257CAF7ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientSample.Mac", "HttpClientSample.Mac\HttpClientSample.Mac.csproj", "{C31A88D9-ADDE-4735-88D7-31906B956E36}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "HttpClientSample.Shared", "HttpClientSample.Shared\HttpClientSample.Shared.shproj", "{7EF2BBB0-6029-422A-B638-B5C1B90E1805}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		HttpClientSample.Shared\HttpClientSample.Shared.projitems*{749449e7-9159-4eb3-aa29-1869ff3ab5f9}*SharedItemsImports = 4
+		HttpClientSample.Shared\HttpClientSample.Shared.projitems*{7ef2bbb0-6029-422a-b638-b5c1b90e1805}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
