@@ -1,8 +1,13 @@
 ﻿using System;
 using Reactive.Bindings;
 using System.Reactive.Linq;
+using System.Windows;
 using HttpClientSample.Shared.Models;
+#if __WPF__
+#endif
+#if __MAC__
 using AppKit;
+#endif
 
 namespace HttpClientSample.Shared.ViewModels
 {
@@ -30,11 +35,16 @@ namespace HttpClientSample.Shared.ViewModels
         {
             var ser = new HttpWebRequestService();
             ser.SaveFileFromUrl(Url.Value, DataDir.Value);
+#if __WPF__
+            MessageBox.Show("完了しました");
+#endif
+#if __MAC__
             using (var alert = new NSAlert())
             {
                 alert.MessageText = "完了しました";
                 alert.RunSheetModal(null);
             }
-		}
+#endif
+        }
     }
 }
