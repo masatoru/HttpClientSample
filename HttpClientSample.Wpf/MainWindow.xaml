@@ -4,15 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HttpClientSample.Wpf"
+        xmlns:viewModels="clr-namespace:HttpClientSample.Shared.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="243.623" Width="431.692">
+    <Window.DataContext>
+        <viewModels:ViewModel/>
+    </Window.DataContext>
     <Grid>
-        <TextBox Name="edtUrl" HorizontalAlignment="Left" Height="23" Margin="10,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="403"/>
+        <TextBox Text="{Binding Url.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="10,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="403"/>
+        <TextBox Text="{Binding DataDir.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="10,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="323"/>
         <Label Content="URL" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top"/>
-        <Button Click="BtnHttpClient_OnClick" Name="btnGet" Content="HttpClientでURLの内容を取得する" HorizontalAlignment="Left" Margin="57,118,0,0" VerticalAlignment="Top" Width="323" RenderTransformOrigin="-1.162,2.911"/>
+        <Button   Content="HttpClientでURLの内容を取得する" HorizontalAlignment="Left" Margin="57,118,0,0" VerticalAlignment="Top" Width="323" RenderTransformOrigin="-1.162,2.911"/>
+        <Button Command="{Binding ExportFileCommand}" Content="WebRequestでURLの内容をファイルに出力する" HorizontalAlignment="Left" Margin="57,143,0,0" VerticalAlignment="Top" Width="323" RenderTransformOrigin="-1.162,2.911"/>
         <Button Click="BtnExit" Content="終了" HorizontalAlignment="Left" Margin="57,168,0,0" VerticalAlignment="Top" Width="323"/>
-        <Button Click="BtnWebRequest_OnClick" x:Name="btnWebRequest" Content="WebRequestでURLの内容をファイルに出力する" HorizontalAlignment="Left" Margin="57,143,0,0" VerticalAlignment="Top" Width="323" RenderTransformOrigin="-1.162,2.911"/>
-        <TextBox x:Name="edtOutPath" HorizontalAlignment="Left" Height="23" Margin="10,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="323"/>
         <Label Content="保存先" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top"/>
         <Button Content="参照" HorizontalAlignment="Left" Margin="338,87,0,0" VerticalAlignment="Top" Width="75"/>
 

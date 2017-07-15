@@ -13,8 +13,8 @@ namespace HttpClientSample.Shared.ViewModels
 {
     public class ViewModel
     {
-		public ReactiveProperty<string> Url { get; } = new ReactiveProperty<string>();
-		public ReactiveProperty<string> DataDir { get; } = new ReactiveProperty<string>();
+		public ReactiveProperty<string> Url { get; private set; } = new ReactiveProperty<string>();
+		public ReactiveProperty<string> DataDir { get; private set; } = new ReactiveProperty<string>();
 		public ReactiveCommand ExportFileCommand { get; }
 
         public ViewModel()
@@ -34,14 +34,16 @@ namespace HttpClientSample.Shared.ViewModels
         void SaveFileFromUrl()
         {
             var ser = new HttpWebRequestService();
-            ser.SaveFileFromUrl(Url.Value, DataDir.Value);
+            var savePath = System.IO.Path.Combine(DataDir.Value, "yahoo.htm");
+            ser.SaveFileFromUrl(Url.Value, savePath);
+            var msg = $"完了しました\n{savePath}";
 #if __WPF__
-            MessageBox.Show("完了しました");
+            MessageBox.Show(msg);
 #endif
 #if __MAC__
             using (var alert = new NSAlert())
             {
-                alert.MessageText = "完了しました";
+                alert.MessageText = msg;
                 alert.RunSheetModal(null);
             }
 #endif

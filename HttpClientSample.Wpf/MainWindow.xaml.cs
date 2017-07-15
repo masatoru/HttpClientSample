@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HttpClientSample.Shared.ViewModels;
 
 namespace HttpClientSample.Wpf
 {
@@ -27,23 +28,11 @@ namespace HttpClientSample.Wpf
         {
             InitializeComponent();
 
-            edtUrl.Text = "https://yahoo.co.jp";
-            var desktopDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            edtOutPath.Text = System.IO.Path.Combine(desktopDir, "yahoo.htm");
+            var vm = this.DataContext as ViewModel;
+            vm.Url.Value = "https://yahoo.co.jp";
+            vm.DataDir.Value= Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         }
 
-        private async void BtnHttpClient_OnClick(object sender, RoutedEventArgs e)
-        {
-            var ser = new HttpGetService();
-            var buf = await ser.GetTextFromUrl(edtUrl.Text);
-            MessageBox.Show($"Content={buf}");
-        }
-        private void BtnWebRequest_OnClick(object sender, RoutedEventArgs e)
-        {
-            var ser = new HttpWebRequestService();
-            ser.SaveFileFromUrl(edtUrl.Text,edtOutPath.Text);
-            MessageBox.Show($"完了しました");
-        }
         private void BtnExit(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
