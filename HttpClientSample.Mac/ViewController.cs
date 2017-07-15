@@ -1,14 +1,13 @@
 ﻿using System;
-
 using AppKit;
 using Foundation;
-using HttpClientSample.Core.Models;
-using HttpClientSample.Shared.Models;
+using HttpClientSample.Shared.ViewModels;
 
 namespace HttpClientSample.Mac
 {
     public partial class ViewController : NSViewController
     {
+        ViewModel vm=new ViewModel();
         public ViewController(IntPtr handle) : base(handle)
         {
         }
@@ -17,46 +16,39 @@ namespace HttpClientSample.Mac
         {
             base.ViewDidLoad();
 
-            // Do any additional setup after loading the view.
-            edtUrl.StringValue = "https://yahoo.co.jp";
 
-            var desktopDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            edtOutPath.StringValue = System.IO.Path.Combine(desktopDir,"yahoo.htm");
 
-            // HttpClientを使ってURLを取得する
-            btnGet.Activated += async (sender, e) => {
-				    var ser = new HttpGetService();
-				    var buf = await ser.GetTextFromUrl(edtUrl.StringValue);
+			// HttpClientを使ってURLを取得する
+			//btnGet.Activated += async (sender, e) => {
+			//var ser = new HttpGetService();
+			//var buf = await ser.GetTextFromUrl(edtUrl.StringValue);
 
-				    using (var alert =new NSAlert()){
-				        alert.MessageText = buf;
-				        alert.RunSheetModal(null);
-				    }
-			};
+			//using (var alert =new NSAlert()){
+			//    alert.MessageText = buf;
+			//    alert.RunSheetModal(null);
+			//}
+			//};
 
-            // HttpWebRequestを使ってURLをファイルに出力する
-            btnWebRequest.Activated += (sender, e) => {
-                var ser = new HttpWebRequestService();
-				ser.SaveFileFromUrl(edtUrl.StringValue, edtOutPath.StringValue);
+            // ViewModelとBindさせる
+            edtUrl.Changed += (o, e) => vm.Url.Value = edtUrl.StringValue;
+            edtOutPath.Changed += (o, e) => vm.DataDir.Value = edtOutPath.StringValue;
+            btnWebRequest.Enabled = vm.ExportFileCommand.CanExecute();
 
-				using (var alert = new NSAlert())
-				{
-					alert.MessageText = "完了しました";
-					alert.RunSheetModal(null);
-				}  
-            };
-        }
+            // 条件を満たさない限りボタンを押せないようにする
+            vm.ExportFileCommand.CanExecuteChanged += (sender, e)
+                => { btnWebRequest.Enabled = vm.ExportFileCommand.CanExecute(); };
 
-        //partial void GetUrlText(NSObject sender)
-        //{
-        //    var ser = new HttpGetService();
-        //    var buf = ser.GetTextFromUrl(edtUrl.StringValue).Result;
+			// HttpWebRequestを使ってURLをファイルに出力する
+			btnWebRequest.Activated += (o, e) => vm.ExportFileCommand.Execute();
 
-        //    using (var alert =new NSAlert()){
-        //        alert.MessageText = buf;
-        //        alert.RunSheetModal(null);
-        //    }
-        //}
+			// UIの初期値
+			edtOutPath.StringValue = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+			edtUrl.StringValue = "https://yahoo.co.jp";
+
+            // TWOWAYでないので以下はだめ(調査中)
+			vm.DataDir.Value = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+			vm.Url.Value = "https://yahoo.co.jp";
+		}
 
         public override NSObject RepresentedObject
         {
