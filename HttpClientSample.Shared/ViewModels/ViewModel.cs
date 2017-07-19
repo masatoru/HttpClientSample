@@ -3,6 +3,7 @@ using Reactive.Bindings;
 using System.Reactive.Linq;
 using System.Windows;
 using HttpClientSample.Shared.Models;
+using Reactive.Bindings.Extensions;
 #if __WPF__
 #endif
 #if __MAC__
@@ -13,14 +14,27 @@ namespace HttpClientSample.Shared.ViewModels
 {
     public class ViewModel
     {
-		public ReactiveProperty<string> Url { get; private set; } = new ReactiveProperty<string>();
-		public ReactiveProperty<string> DataDir { get; private set; } = new ReactiveProperty<string>();
+		public ReactiveProperty<string> Url { get; }
+		public ReactiveProperty<string> DataDir { get; }
 		public ReactiveCommand ExportFileCommand { get; }
+        MainModel Model { get; } = new MainModel();
 
         public ViewModel()
         {
-            // URLに文字列があるかつディレクトリがあるなら実行可能
-            ExportFileCommand = DataDir
+            Url = this.Model
+            	.ObserveProperty(x => x.Url)
+            	.ToReactiveProperty();
+            DataDir = this.Model
+                .ObserveProperty(x => x.DataDir)
+                .ToReactiveProperty();
+
+            //Url = this.Model
+            //          .ToReactivePropertyAsSynchronized(x => x.Url);
+            //DataDir = this.Model
+                          //.ToReactivePropertyAsSynchronized(x => x.DataDir);
+
+			// URLに文字列があるかつディレクトリがあるなら実行可能
+			ExportFileCommand = DataDir
                 .CombineLatest(Url, (dataDir,url)=> !string.IsNullOrEmpty(url)
                                && !string.IsNullOrEmpty(dataDir)
                                && System.IO.Directory.Exists(dataDir))

@@ -29,10 +29,13 @@ namespace HttpClientSample.Mac
 			//}
 			//};
 
-            // ViewModelとBindさせる
-            edtUrl.Changed += (o, e) => vm.Url.Value = edtUrl.StringValue;
+			// ViewModelとBindさせる
+
+            // 多分この方法がNG
+			// http://monobook.org/wiki/ReactiveUI/Xamarin.Mac%E3%81%AENSTextField%E3%81%AB%E3%83%90%E3%82%A4%E3%83%B3%E3%83%89%E3%81%99%E3%82%8B
+			edtUrl.Changed += (o, e) => vm.Url.Value = edtUrl.StringValue;
             edtOutPath.Changed += (o, e) => vm.DataDir.Value = edtOutPath.StringValue;
-            btnWebRequest.Enabled = vm.ExportFileCommand.CanExecute();
+            //btnWebRequest.Enabled = vm.ExportFileCommand.CanExecute();
 
             // 条件を満たさない限りボタンを押せないようにする
             vm.ExportFileCommand.CanExecuteChanged += (sender, e)
@@ -41,13 +44,13 @@ namespace HttpClientSample.Mac
 			// HttpWebRequestを使ってURLをファイルに出力する
 			btnWebRequest.Activated += (o, e) => vm.ExportFileCommand.Execute();
 
-			// UIの初期値
+			// 1.UIの初期値 初回がだめ
 			edtOutPath.StringValue = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 			edtUrl.StringValue = "https://yahoo.co.jp";
 
-            // TWOWAYでないので以下はだめ(調査中)
-			vm.DataDir.Value = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-			vm.Url.Value = "https://yahoo.co.jp";
+            // 2.値は入ってるのでCanExecuteは有効だけどUIが更新されない
+			//vm.DataDir.Value = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+			//vm.Url.Value = "https://yahoo.co.jp";
 		}
 
         public override NSObject RepresentedObject
